@@ -28,7 +28,18 @@ with open(filename, 'rb') as f:
     content = f.read()
 
 hexData = binascii.hexlify(content)
-hexList = list(''.join(map(chr,hexData)))
+#####################################################################
+# Trying to convert a certificate, I found this error:
+
+#Traceback (most recent call last):
+#  File "C:\Users\Bernie\Documents\Arduino\certs\CertToESP8266.py", line 33, in <module>
+#    hexList = list(''.join(map(chr,hexData)))
+#TypeError: an integer is required
+
+#I removed the attempt to convert the hexData to chars:
+#hexList = list(''.join(map(chr,hexData)))
+hexList = list(''.join(hexData))
+
 print('// '+filename)
 print('const unsigned char caCert[] PROGMEM = {\n')
 outString = ''
